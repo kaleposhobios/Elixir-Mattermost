@@ -18,7 +18,7 @@ defmodule Mattermost.Mixfile do
   end
 
   defp deps do
-    [{:httpoison, "~> 0.11"},
+    [{:httpoison, "~> 1.0"},
      {:exjsx, "~> 3.2.0"},
      {:websocket_client, "~> 1.2.1"},
      {:mustache, "~> 0.3.1"},
