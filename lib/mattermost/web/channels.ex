@@ -7,6 +7,18 @@ defmodule Mattermost.Web.Channels do
   """
 
   ####################################################################
+  @api_create "/api/v4/channels/direct" # POST
+  @doc """
+  Create a direct message channel
+  """
+  def direct(user_ids, mattermost) do
+    endpoint = mattermost.url <> @api_create
+    pathing = %{}
+    payload = user_ids
+    Mattermost.Web.post(endpoint, pathing, payload, [], mattermost)
+  end
+
+  ####################################################################
   @api_update "/api/v3/teams/{{team_id}}/channels/{{channel_id}}/update" # POST
   @doc """
   Update a channel

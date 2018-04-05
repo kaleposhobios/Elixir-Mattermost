@@ -5,7 +5,7 @@ defmodule Mattermost.Web.Users do
   @api_logout "/api/v3/users/logout"
 
   @api_me "/api/v3/users/me"
-  @api_by_name "/api/v3/users/users/name/{username}"
+  @api_by_name "/api/v4/users/usernames"
   @api_by_email "/api/v3/users/users/email/{email}"
   @api_by_ids "/api/v4/users/ids"
 
@@ -39,6 +39,19 @@ defmodule Mattermost.Web.Users do
     endpoint = mattermost.url <> @api_by_ids
     pathing = %{}
     payload = [user_id]
+    case Mattermost.Web.raw_request(:post, endpoint, pathing, payload, [], mattermost) do
+        {:ok, %{response: json, headers: headers}} ->
+          {:ok, json}
+        {:error, reason} ->
+          {:error, reason}
+    end
+  end
+
+  def users_by_names(usernames, mattermost) do
+    endpoint = mattermost.url <> @api_by_name
+    pathing = %{}
+    payload = usernames
+    Apex.ap payload
     case Mattermost.Web.raw_request(:post, endpoint, pathing, payload, [], mattermost) do
         {:ok, %{response: json, headers: headers}} ->
           {:ok, json}
