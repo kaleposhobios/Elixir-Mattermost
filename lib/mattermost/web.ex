@@ -14,10 +14,17 @@ defmodule Mattermost.Web do
 
   ####################################################################
   def request(method, endpoint, pathing, payload, headers, state) do
+    IO.puts "Calling endpoint with payload"
+    Apex.ap endpoint
+    Apex.ap payload
     case raw_request(method, endpoint, pathing, payload, headers, state) do
       {:ok, %{response: json, headers: headers}} ->
+        IO.puts "Received payload"
+        Apex.ap json
         {:ok, json}
       {:error, reason} ->
+        IO.puts "Received error"
+        Apex.ap reason
         {:error, reason}
     end
   end
