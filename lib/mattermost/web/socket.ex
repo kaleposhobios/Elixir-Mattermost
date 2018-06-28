@@ -26,7 +26,7 @@ defmodule Mattermost.Web.Socket do
     wsurl("ws" <> url)
   end
   def wsurl(url) do
-    String.to_char_list(url <> "/api/v3/users/websocket")
+    String.to_char_list(url <> "/api/v4/websocket")
   end
 
 
